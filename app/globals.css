@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* Dark Romance design tokens (Tailwind v4 CSS-first configuration). */
+@theme {
+  --color-abyss: #050304;
+  --color-crypt: #0e0608;
+  --color-wine: #4a0e17;
+  --color-bordeaux: #6b1324;
+  --color-blood: #8c1c2e;
+  --color-gold: #c9a24b;
+  --color-gold-soft: #e8d39b;
+  --color-parchment: #eee2cf;
+  --color-ash: #9b8f86;
+
+  --font-display: var(--font-cinzel), "Times New Roman", serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+
+  --animate-mist-drift: mist-drift 16s ease-in-out infinite alternate;
+  --animate-candle-flicker: candle-flicker 3.2s ease-in-out infinite;
+  --animate-ember-rise: ember-rise 900ms ease-out both;
+
+  @keyframes mist-drift {
+    0% {
+      transform: translate3d(-4%, 2%, 0) scale(1.05);
+      opacity: 0.85;
+    }
+    100% {
+      transform: translate3d(4%, -2%, 0) scale(1.15);
+      opacity: 1;
+    }
+  }
+
+  @keyframes candle-flicker {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    45% {
+      opacity: 0.8;
+    }
+    60% {
+      opacity: 0.45;
+    }
+  }
+
+  @keyframes ember-rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-abyss font-serif text-parchment antialiased;
+  }
+
+  ::selection {
+    @apply bg-bordeaux text-gold-soft;
+  }
+}
+
+@utility text-gilded {
+  @apply bg-linear-to-b from-gold-soft via-gold to-[#8a6a2a] bg-clip-text text-transparent;
+}
+
+@utility ornate-panel {
+  @apply rounded-sm border border-gold/25 bg-crypt/80 shadow-[0_0_60px_-15px] shadow-wine backdrop-blur-sm;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
